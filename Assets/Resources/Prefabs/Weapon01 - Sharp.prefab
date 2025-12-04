@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4306942418429103363}
   m_Layer: 5
   m_Name: Weapon01 - Sharp
-  m_TagString: Card
+  m_TagString: Card1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,3 +91,4 @@ MonoBehaviour:
   champ: {fileID: 0}
   cardType: 1
   cardSlot: 0
+  playerNum: 1
