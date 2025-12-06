@@ -4,12 +4,11 @@ using UnityEngine.EventSystems;
 public class CardBehavior : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Champion champ;
-    public int cardType, cardSlot, playerNum;
+    public int cardType, cardSlot;
 
     private void Awake()
     {
-        champ = GameObject.Find("Champion" + playerNum).GetComponent<Champion>();
-        gameObject.tag = "Card" + playerNum;
+        champ = GameObject.FindGameObjectWithTag("Player").GetComponent<Champion>();
         cardSlot = int.Parse(transform.parent.name);
     }
 
@@ -20,23 +19,14 @@ public class CardBehavior : MonoBehaviour, IPointerClickHandler
 
         //If there are Cards in Deck, Replace Card
         //Else, just Destroy
-        if(!champ.hasPlayedCard)
+        if (champ.playerCards.Count != 0)
         {
-            if (champ.playerCards.Count != 0)
-            {
-                champ.hasPlayedCard = true;
-                champ.ReplaceCard(cardSlot, playerNum);
-            }
-            else
-            {
-                champ.hasPlayedCard = true;
-                Destroy(gameObject);
-                champ.playerHand.RemoveAt(cardSlot);
-            }
+            champ.ReplaceCard(cardSlot);
         }
         else
         {
-            Debug.Log("PLAYED CARD ALREADY");
+            Destroy(gameObject);
+            champ.playerHand.RemoveAt(cardSlot);
         }
     }
 }

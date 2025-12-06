@@ -9,14 +9,20 @@ public class GameManager : MonoBehaviour
     public int damage, p1Health, p2Health;
 
     public Sprite[] armorSprite;
+    public GameObject[] cardList;
+    public Transform[] cardPos;
 
     //Canvas
-    public Image armorImg1, armorImg2;
+    [SerializeField] private Image armorImg1, armorImg2;
     //change this later to scroller for hp bar
     public TextMeshProUGUI p1HealthTxt, p2HealthTxt;
 
-    private void Awake()
+    private void Start()
     {
+        //Find Players
+        player1 = GameObject.Find("Champion");
+        player2 = GameObject.Find("Champion 2");
+
         //Set Players' Starting Health
         p1Health = 100;
         p1HealthTxt.text = p1Health.ToString();
@@ -28,7 +34,7 @@ public class GameManager : MonoBehaviour
         GetArmor(armorImg2, player2);
     }
 
-    public void GetArmor(Image img, GameObject player)
+    void GetArmor(Image img, GameObject player)
     {
         //Get Armor Type from Player
         int armor = player.GetComponent<Champion>().chArmor;
