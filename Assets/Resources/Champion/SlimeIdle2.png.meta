@@ -102,6 +102,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -111,17 +124,17 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 63
+        height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 235d436c58bf2cd4390eaa974d2632a1
+      spriteID: ea5f45cb0e9712240800000000000000
       internalID: 4765223886874015150
       vertices: []
       indices: 
@@ -131,19 +144,19 @@ TextureImporter:
       name: SlimeIdle2_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 127
         y: 0
-        width: 16
-        height: 16
+        width: 66
+        height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: fc2556735bf02d44d82c1aac56099044
+      spriteID: 98f370633830c5e70800000000000000
       internalID: 9105156408718344073
       vertices: []
       indices: 
@@ -153,19 +166,19 @@ TextureImporter:
       name: SlimeIdle2_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 200
         y: 0
-        width: 16
-        height: 16
+        width: 56
+        height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bdb6c836b2123a6408d078abe9eb2e90
+      spriteID: 318f1293ca75f7100800000000000000
       internalID: 107901313284700179
       vertices: []
       indices: 
@@ -175,20 +188,20 @@ TextureImporter:
       name: SlimeIdle2_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 60
         y: 0
-        width: 16
-        height: 16
+        width: 64
+        height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 1, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 757fd435dc3f3a444948b9167713164a
-      internalID: 2134678597
+      spriteID: c2adbe5cf11fb754092c08ddc746de9b
+      internalID: -1618591721
       vertices: []
       indices: 
       edges: []
@@ -197,7 +210,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bbced5a6538cfc9418e4cf940254722c
+    spriteID: 67542f4c1a613ec44af1f8a943a3e4b1
     internalID: 0
     vertices: []
     indices: 
@@ -210,7 +223,7 @@ TextureImporter:
       SlimeIdle2_0: 4765223886874015150
       SlimeIdle2_1: 9105156408718344073
       SlimeIdle2_2: 107901313284700179
-      SlimeIdle2_3: 2134678597
+      SlimeIdle2_3: -1618591721
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
