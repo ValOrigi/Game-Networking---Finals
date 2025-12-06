@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Champion : MonoBehaviour
@@ -34,14 +35,22 @@ public class Champion : MonoBehaviour
     public List<int> playerCards = new List<int>();
     public List<int> playerHand = new List<int>();
 
+    public GameObject[] cardList;
+    public Transform[] cardPos;
+
+    public bool hasPlayedCard;
+
+    public TextMeshProUGUI readyText;
+
     //might need to switch this over to update if we start the game without a player 2
     //check later
     private void Awake()
     {
+        hasPlayedCard = false;
+
         //Set Player 1's Hand
         GetHand();
     }
-
     public void GetHand()
     {
         //Do it 3 Times
@@ -57,11 +66,11 @@ public class Champion : MonoBehaviour
         int count = 0;
         foreach (var cards in playerHand)
         {
-            Instantiate(gameManager.cardList[cards - 1], gameManager.cardPos[count++]);
+            Instantiate(cardList[cards - 1], cardPos[count++]);
         }
     }
 
-    public void GetCard(int cardPosition)
+    public void GetCard(int cardPosition, int playerNum)
     {
         int randomNum = Random.Range(0, playerCards.Count);
         playerHand.RemoveAt(cardPosition);
@@ -69,13 +78,13 @@ public class Champion : MonoBehaviour
         playerCards.RemoveAt(randomNum);
 
         //Clear All Cards
-        DestroyAll("Card");
+        DestroyAll("Card" + playerNum);
 
         //Instantiate Hand
         int count = 0;
         foreach (var cards in playerHand)
         {
-            Instantiate(gameManager.cardList[cards - 1], gameManager.cardPos[count++]);
+            Instantiate(cardList[cards - 1], cardPos[count++]);
         }
     }
 
@@ -91,8 +100,9 @@ public class Champion : MonoBehaviour
         }
     }
 
-    public void ReplaceCard(int cardPosition)
+    public void ReplaceCard(int cardPosition, int playerNum)
     {
-        GetCard(cardPosition);
+        GetCard(cardPosition, playerNum);
+        readyText.text = "READY!";
     }
 }

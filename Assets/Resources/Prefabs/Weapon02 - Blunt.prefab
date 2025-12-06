@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1068516689720056507}
   m_Layer: 5
   m_Name: Weapon02 - Blunt
-  m_TagString: Card
+  m_TagString: Card1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 256, y: 420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1778096895252974400
 CanvasRenderer:
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: aabe53bf41068ea47bb2e50a2f517a38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62179cf9e5399ce4495c19b0c614d73c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -91,3 +91,4 @@ MonoBehaviour:
   champ: {fileID: 0}
   cardType: 2
   cardSlot: 0
+  playerNum: 1

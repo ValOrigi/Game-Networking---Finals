@@ -9,12 +9,7 @@ public class HomeManager : MonoBehaviour
         sceneManager.HomeToBuild();
     }
 
-    public void RegisterButton()
-    {
-
-    }
-
-    public void Login()
+    public void LoginRegisterButton()
     {
 
     }
