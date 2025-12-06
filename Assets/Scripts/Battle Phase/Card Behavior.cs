@@ -15,8 +15,11 @@ public class CardBehavior : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
+        AudioManager.Instance.PlaySFX("Card SFX 1");
+
         //Will Change the Player's Weapon Type
         champ.chWeapon = cardType;
+ 
 
         //If there are Cards in Deck, Replace Card
         //Else, just Destroy
