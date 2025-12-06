@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1068516689720056507}
   m_Layer: 5
   m_Name: Weapon02 - Blunt
-  m_TagString: Card1
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,4 +91,3 @@ MonoBehaviour:
   champ: {fileID: 0}
   cardType: 2
   cardSlot: 0
-  playerNum: 1

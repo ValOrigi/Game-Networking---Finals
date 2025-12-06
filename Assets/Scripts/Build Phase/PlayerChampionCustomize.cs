@@ -7,18 +7,17 @@ using UnityEngine.UI;
 
 public class PlayerChampionCustomize : MonoBehaviour
 {
-    //[SerializeField] Transform championPos;
-    //[SerializeField] private int[] _armor;
+    [SerializeField] Transform championPos;
+    [SerializeField] private int[] _armor;
     [SerializeField] Player player;
 
-    //[SerializeField] GameObject _championPref;
+    [SerializeField] GameObject _championPref;
     [SerializeField] ChampionEquipment _championEquipment;
     [SerializeField] GameManager _gameManager;
     [SerializeField] Champion champion;
     [SerializeField] SceneManager _sceneManager;
 
     [SerializeField] TextMeshProUGUI _bluntPoint, _sharpPoint, _rangePoint, _remainingPoint;
-    public TextMeshProUGUI playerScoreText;
 
     [SerializeField] Image currentArmorImage;
 
@@ -26,16 +25,15 @@ public class PlayerChampionCustomize : MonoBehaviour
 
     private void Start()
     {
-        //player = GameObject.Find("Player").GetComponent<Player>();
+        player = GameObject.Find("Player").GetComponent<Player>();
 
-        //GameObject NewChamp = Instantiate(_championPref, championPos);
-        //player._champion = NewChamp;
+        GameObject NewChamp = Instantiate(_championPref, championPos);
+        player._champion = NewChamp;
 
-        //_championEquipment = NewChamp.GetComponent<ChampionEquipment>();
+        _championEquipment = NewChamp.GetComponent<ChampionEquipment>();
         
         //UIScript = GetComponent<PlayerChampionCustomizeUI>();
 
-        player.playerScore = 0;
         ResetChampionWeaponPoints();
     }
 
@@ -44,6 +42,24 @@ public class PlayerChampionCustomize : MonoBehaviour
         if (_championEquipment._championCurrentPointVal == _championEquipment._championMaxPointVal && _championEquipment._championArmor != 0) 
         {
             player._isReady = true;
+
+            for(int i = 0; i < _championEquipment._sharpWeaponVal; i++)
+            {
+                _championEquipment.Deck.Add(1);
+            }
+
+            for (int i = 0; i < _championEquipment._bluntWeaponVal; i++)
+            {
+                _championEquipment.Deck.Add(2);
+            }
+
+            for (int i = 0; i < _championEquipment._rangeWeaponVal; i++)
+            {
+                _championEquipment.Deck.Add(3);
+            }
+
+            //change this when multiplayer is on
+            _sceneManager.BuildToBattle();
         }
         else if (_championEquipment._championArmor == 0)
         {
@@ -59,87 +75,80 @@ public class PlayerChampionCustomize : MonoBehaviour
 
     public void AddWeaponStatButton(int index)
     {
-        if (!player._isReady)
+        switch (index)
         {
-            switch (index)
-                    {
-                        case 0:
-                            Debug.Log(index + "is Clicked on Add sharp");
-                            //AddWeaponStat(_championEquipment._sharpWeaponVal, _sharpPoint);
-                            if (_championEquipment._championMaxPointVal > _championEquipment._championCurrentPointVal)
-                            {
-                                ++_championEquipment._sharpWeaponVal;
-                                ++_championEquipment._championCurrentPointVal;
-                                _sharpPoint.text = _championEquipment._sharpWeaponVal.ToString();
-                            }
-                            break;
-                        case 1:
-                            Debug.Log(index + "is Clicked on Add blunt");
-                            //AddWeaponStat(_championEquipment._bluntWeaponVal, _bluntPoint);
-                            if (_championEquipment._championMaxPointVal > _championEquipment._championCurrentPointVal)
-                            {
-                                ++_championEquipment._bluntWeaponVal;
-                                ++_championEquipment._championCurrentPointVal;
-                                _bluntPoint.text = _championEquipment._bluntWeaponVal.ToString();
-                            }
-                            break;
-                        case 2:
-                            Debug.Log(index + "is Clicked on Add range");
-                            //AddWeaponStat(_championEquipment._rangeWeaponVal, _rangePoint);
-                            if (_championEquipment._championMaxPointVal > _championEquipment._championCurrentPointVal)
-                            {
-                                ++_championEquipment._rangeWeaponVal;
-                                ++_championEquipment._championCurrentPointVal;
-                                _rangePoint.text = _championEquipment._rangeWeaponVal.ToString();
-                            }
-                            break;
-                    }
-
-            UpdateRemainingPoints();
+            case 0:
+                Debug.Log(index + "is Clicked on Add sharp");
+                //AddWeaponStat(_championEquipment._sharpWeaponVal, _sharpPoint);
+                if (_championEquipment._championMaxPointVal > _championEquipment._championCurrentPointVal)
+                {
+                    ++_championEquipment._sharpWeaponVal;
+                    ++_championEquipment._championCurrentPointVal;
+                    _sharpPoint.text = _championEquipment._sharpWeaponVal.ToString();
+                }
+                break;
+            case 1:
+                Debug.Log(index + "is Clicked on Add blunt");
+                //AddWeaponStat(_championEquipment._bluntWeaponVal, _bluntPoint);
+                if (_championEquipment._championMaxPointVal > _championEquipment._championCurrentPointVal)
+                {
+                    ++_championEquipment._bluntWeaponVal;
+                    ++_championEquipment._championCurrentPointVal;
+                    _bluntPoint.text = _championEquipment._bluntWeaponVal.ToString();
+                }
+                break;
+            case 2:
+                Debug.Log(index + "is Clicked on Add range");
+                //AddWeaponStat(_championEquipment._rangeWeaponVal, _rangePoint);
+                if (_championEquipment._championMaxPointVal > _championEquipment._championCurrentPointVal)
+                {
+                    ++_championEquipment._rangeWeaponVal;
+                    ++_championEquipment._championCurrentPointVal;
+                    _rangePoint.text = _championEquipment._rangeWeaponVal.ToString();
+                }
+                break;
         }
-        
+
+        UpdateRemainingPoints();
     }
 
     public void SubtractWeaponStatButton(int index)
     {
-        if (!player._isReady)
+        switch (index)
         {
-            switch (index)
-            {
-                case 0:
-                    Debug.Log(index + "is Clicked on Minus sharp");
-                    //SubtractWeaponStat(_championEquipment._sharpWeaponVal, _sharpPoint);
-                    if (_championEquipment._championCurrentPointVal > 0 && _championEquipment._sharpWeaponVal > 0)
-                    {
-                        --_championEquipment._sharpWeaponVal;
-                        --_championEquipment._championCurrentPointVal;
-                        _sharpPoint.text = _championEquipment._sharpWeaponVal.ToString();
-                    }
-                    break;
-                case 1:
-                    Debug.Log(index + "is Clicked on Minus blunt");
-                    //SubtractWeaponStat(_championEquipment._bluntWeaponVal, _bluntPoint);
-                    if (_championEquipment._championCurrentPointVal > 0 && _championEquipment._bluntWeaponVal > 0)
-                    {
-                        --_championEquipment._bluntWeaponVal;
-                        --_championEquipment._championCurrentPointVal;
-                        _bluntPoint.text = _championEquipment._bluntWeaponVal.ToString();
-                    }
-                    break;
-                case 2:
-                    Debug.Log(index + "is Clicked on Minus range");
-                    //SubtractWeaponStat(_championEquipment._rangeWeaponVal, _rangePoint);
-                    if (_championEquipment._championCurrentPointVal > 0 && _championEquipment._rangeWeaponVal > 0)
-                    {
-                        --_championEquipment._rangeWeaponVal;
-                        --_championEquipment._championCurrentPointVal;
-                        _rangePoint.text = _championEquipment._rangeWeaponVal.ToString();
-                    }
-                    break;
-            }
-
-            UpdateRemainingPoints();
+            case 0:
+                Debug.Log(index + "is Clicked on Minus sharp");
+                //SubtractWeaponStat(_championEquipment._sharpWeaponVal, _sharpPoint);
+                if (_championEquipment._championCurrentPointVal > 0 && _championEquipment._sharpWeaponVal > 0)
+                {
+                    --_championEquipment._sharpWeaponVal;
+                    --_championEquipment._championCurrentPointVal;
+                    _sharpPoint.text = _championEquipment._sharpWeaponVal.ToString();
+                }
+                break;
+            case 1:
+                Debug.Log(index + "is Clicked on Minus blunt");
+                //SubtractWeaponStat(_championEquipment._bluntWeaponVal, _bluntPoint);
+                if (_championEquipment._championCurrentPointVal > 0 && _championEquipment._bluntWeaponVal > 0)
+                {
+                    --_championEquipment._bluntWeaponVal;
+                    --_championEquipment._championCurrentPointVal;
+                    _bluntPoint.text = _championEquipment._bluntWeaponVal.ToString();
+                }
+                break;
+            case 2:
+                Debug.Log(index + "is Clicked on Minus range");
+                //SubtractWeaponStat(_championEquipment._rangeWeaponVal, _rangePoint);
+                if (_championEquipment._championCurrentPointVal > 0 && _championEquipment._rangeWeaponVal > 0)
+                {
+                    --_championEquipment._rangeWeaponVal;
+                    --_championEquipment._championCurrentPointVal;
+                    _rangePoint.text = _championEquipment._rangeWeaponVal.ToString();
+                }
+                break;
         }
+
+        UpdateRemainingPoints();
     }
 
     public void ResetChampionWeaponPoints()

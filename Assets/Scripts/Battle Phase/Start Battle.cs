@@ -6,63 +6,34 @@ using TMPro;
 public class StartBattle : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private SceneManager sceneManager;
-    [SerializeField] private GameObject champ1, champ2, winnerText, player1, player2;
+    [SerializeField] private GameObject winnerText;
 
     //this will be an event when both players ready up their weapon
     void Ready()
     {
-        Champion c1 = champ1.GetComponent<Champion>();
-        Champion c2 = champ2.GetComponent<Champion>();
-        
-        if (c1.hasPlayedCard && c2.hasPlayedCard)
+        //Evaluate Player 1 Health
+        gameManager.p1Health -= EvaluateHealth(gameManager.player1, gameManager.player2);
+        gameManager.p1HealthTxt.text = gameManager.p1Health.ToString();
+
+        //Evaluate Player 2 Health
+        gameManager.p2Health -= EvaluateHealth(gameManager.player2, gameManager.player1);
+        gameManager.p2HealthTxt.text = gameManager.p2Health.ToString();
+
+        if ((gameManager.p1Health < 0 || gameManager.p2Health < 0) && gameManager.p1Health != gameManager.p2Health)
         {
-            //Evaluate Player 1 Health
-            gameManager.p1Health -= EvaluateHealth(gameManager.player1, gameManager.player2);
-            gameManager.p1HealthTxt.text = gameManager.p1Health.ToString();
+            TextMeshProUGUI winText = winnerText.GetComponent<TextMeshProUGUI>();
 
-            //Evaluate Player 2 Health
-            gameManager.p2Health -= EvaluateHealth(gameManager.player2, gameManager.player1);
-            gameManager.p2HealthTxt.text = gameManager.p2Health.ToString();
-
-            c1.hasPlayedCard = false;
-            c2.hasPlayedCard = false;
-            c1.readyText.text = "NOT READY!";
-            c2.readyText.text = "NOT READY!";
-
-            if ((gameManager.p1Health <= 0 || gameManager.p2Health <= 0) && gameManager.p1Health != gameManager.p2Health)
+            if (gameManager.p1Health > gameManager.p2Health)
             {
-                TextMeshProUGUI winText = winnerText.GetComponent<TextMeshProUGUI>();
-
-                if (gameManager.p1Health > gameManager.p2Health)
-                {
-                    winText.text = "PLAYER 1 WINS";
-                    player1.GetComponent<Player>().playerScore++;
-                    player1.GetComponent<PlayerChampionCustomize>().playerScoreText.text = "Score: " + player1.GetComponent<Player>().playerScore;
-                    player2.GetComponent<Player>()._isReady = false;
-                }
-                else
-                {
-                    winText.text = "PLAYER 2 WINS";
-                    player2.GetComponent<Player>().playerScore++;
-                    player2.GetComponent<PlayerChampionCustomize>().playerScoreText.text = "Score: " + player2.GetComponent<Player>().playerScore;
-                    player1.GetComponent<Player>()._isReady = false;
-                }
-
-                winnerText.SetActive(true);
-
-                //add wait
-
-                winnerText.SetActive(false);
-
-                sceneManager.BattleToBuild();
+                winText.text = "PLAYER 1 WINS";
             }
+            else
+            {
+                winText.text = "PLAYER 2 WINS";
+            }
+
+            winnerText.SetActive(true);
         }
-        else
-        {
-            Debug.Log("PLAYERS READY UP FIRST");
-        }
-        
     }
 
     int EvaluateHealth(GameObject defence, GameObject offence)
